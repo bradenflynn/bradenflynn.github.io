@@ -1,0 +1,100 @@
+Colin Roy, Daniel Avelar, Braden Flynn, Mariano Del Castillo
+Dr. Levkoff
+BUAN 314
+12/14/2025
+Data Mining Project: Toyota Used Cars Dataset
+Executive Summary
+	This report presents an exploratory and predictive analysis of a dataset containing 6,738 used Toyota vehicle records (potentially simulated data) taken from the website Kaggle. To ensure that the data would present interesting patterns worth discussing, our team would do a brief analysis in R of each potential dataset we considered using by assembling a correlation matrix of the variables in each dataset. If there was nothing worth discussing, we would search for different data.
+	We ran a summary of the data and a few queries in both sqldf and dplyr (R libraries) to see what needed to be cleaned, and we only ended up needing to clean two variables since the data was very neat to begin with.
+The study begins with a detailed graphical examination of the patterns and distributions of eight key variables (model, year, price, transmission, milege, fuel-type, mpg, and engine size) to understand their individual characteristics and relationships to one another in terms of correlation. This was done using the ggplot2 library in R.
+To further support and validate the visual modeling results, the analysis incorporates structured queries using the sqldf library in R. These queries provide an additional layer of insight by revealing patterns and relationships that may not be immediately evident in graphical outputs alone. 
+Building on these exploratory findings, the report develops a linear regression model designed to predict vehicle prices based on selected explanatory variables. The modeling process is informed by insights gained during the exploratory phase, allowing for a more grounded interpretation of how different factors influence pricing outcomes. Together the exploratory analysis, through both graphs and queries, and statistical modeling offer a cohesive understanding of the data and its implications for price prediction.
+This data can be used to describe how certain variables were related to price in the market at the time the data was taken (as well as see what vehicles and vehicle attributes were most common on the market at the time), predict what a vehicle with certain attributes may cost, and be able to prescribe a price to a vehicle with certain attributes in order to sell that vehicle.
+
+Cleaning/Preprocessing the Data
+
+We started by running the summary function on our data to see some basic info on the distributions of each variable. This function will list the number of NA values for each variable, but there were actually none in this dataset prior to cleaning. The variable names did not need to be changed because they do not contain any special characters, they describe each variable field appropriately, and are not too long for practical use. 
+However, there are some outlier records in a few of the variables. In the engineSize variable, there were vehicles with a listed ‘0’ as their engineSize. This must have been an error when the data was collected, and will need to be fixed. In the ‘mpg,’ or miles per gallon variable, there are some vehicles that supposedly get as little as 2.8 mpg. There are also vehicle records claiming that specific vehicles can get 235 mpg. Neither of these are realistic for the types of vehicles included in this dataset. The ‘tax’ variable will not be used because we do not have an exact location for where this data was collected, but it was most likely taken in the UK or greater Europe based on a few clues. These clues include the model names included in the dataset are not found in the USA, and the fact that the fuelType for gasoline is instead listed as petrol.
+
+The summary function does not give too much useful information on the categorical variables (transmission, mileage, and fuelType), so we ran some additional SQL queries using the “sqldf” R library. There does not appear to be anything wrong with the categories that were found in each SQL query. There are no duplicate categories with different spelling or capitalization.
+
+	The chunk of code above is what was used to clean the dataset. Line 22 is to see how many vehicles have an engine size of less than 1 liter of displacement.
+Line 22 results in the following 6 records being printed to the console. We researched each of these specific vehicles and found that each one had an engine size of about 1 liter of displacement. This mistake must have been a rounding error when the data was collected. An ifelse statement is then used in line 24 to impute the zero values with a 1. This edit is saved under a new dataframe called toyota_enginefix. 
+
+
+Line 27 results in the following being printed to the console. About half of the records in the dataset had inflated mpg values. The highest values came from Prius models. When the 2017 Prius’ actual mpg value is researched online, it is actually around 50-55 mpg, far less than the listed 235 in our dataset. All vehicles with a mpg value above 60 were imputed back down to 60 using line 31. This edit is saved under a new dataframe called toyota_mpgfix. Vehicles with very low mpg values (around 2.8) were all listings for the Toyota Hilux. These values were meant to be 28 since this is the actual mpg for this vehicle, so they were imputed from 2.8 to 28 in line 35 with an ifelse statement, and there was a new dataframe called toyota_mpgfix2 created. Line 38 uses dplyr to make a key variable, and a new dataframe called toyota_key is created. SQL queries are then used to split toyota_key into toyota_extinfo, and toyota_carspecs.
+
+Exploring the Data With ggplot2 visualizations and sqldf SQL queries
+
+Visualization 1: scatter plot of engine size and price variables
+
+
+The first visualization that we created is a scatter plot with a linear smoothing line, attempting to show the relationship between engine size in liters versus the price of each vehicle. The graph shows a positive correlation between the size of a vehicle’s engine and its price. That being said, there is a large amount of variability for the price of a vehicle depending on its engine size according to this graph.           
+Visualization 2: 
+
+
+This graph builds upon the first visualization by now using the engine size variable to color each of the points, while plotting with mpg values on the x axis. Price is still on the y axis. There appears to be a weak negative correlation between the miles per gallon of a vehicle and its price. As expected, the vehicles with the larger engines (lighter on the blue color gradient seen in the legend on the right of the graph) are generally higher in price, and also have lower mpg values because they burn more fuel. The vehicles with smaller engines and higher mpg values are clustered in the bottom right of the graph. 
+Visualization 3:
+
+
+A few different observations can be made by looking at this box plot of each vehicle model and its distribution across the price variable. The vehicles with the greatest range of prices are the RAV4 and the Land Cruiser. The vehicles with the highest prices are the Supra, Land Cruiser, and Proace Verso. The vehicles with the lowest prices are the Verso-s, Urban Cruiser, and IQ. These results are not surprising because they are in line with the pricing and value of each of these vehicles. The Supra and Land Cruiser are some of Toyota’s premium models. The high variability of pricing of the RAV4 and Land Cruiser may have to do with these being off-road vehicles that may experience more variability in their wear from vehicle to vehicle due to where each one is being driven. The low price vehicles mentioned above are all more budget friendly type vehicles.
+Visualization 4:
+
+
+This graph shows that the exceeding majority of vehicle records in the dataset are vehicles with less than 60,000 miles on the odometer. This may affect some of the patterns seen in the data, and also means that this data is going to be less useful for building a predictive model to estimate the prices of older vehicles with more mileage.
+Visualization 5:
+
+
+This histogram shows that almost all of the vehicles in the data are from 2012 and newer, with the newest model being from 2020. Just like the previous purple density curve showing the distribution of vehicle mileages in the data, this histogram shows that this data is not representative of vehicles older than 15 or so years. 
+Visualization 6:
+
+
+Most vehicles in the dataset are either gasoline/petrol or hybrid vehicles. 
+
+Query 1:
+
+As expected, the average price tends to go up with the engine size. The three most common engine sizes in the data are 1.0, 1.5, and 1.8. 
+Query 2:
+
+Average mileage appears to be positively correlated with engine size. That being said, there may be other factors at play, such as the fact that older models tend to have larger engines, and these models likely have more mileage due to their age. 
+Query 3&4:
+
+Smaller engines have a higher average mpg according to the query comparing engine size to mpg. The other query shown is a count of each unique mpg value. Realistically the mpg variable would be a continuous variable that could not be grouped this way, but in our data it can be. This led our team to be suspicious of whether or not this data was simulated, especially considering some of the inflated mpg values that were imputed out during the data cleaning process.
+Query 5:
+
+Hybrid engines fetch the highest average price out of the four fuel types listed in our data.
+Query 6:
+
+Automatic transmissions fetched the highest average price out of the four transmission types listed in our data
+Query 7-9:
+
+Most vehicles in our data appear to have multiple different transmission options. Their average and maximum prices are noticeably different for some models due to their high variability in pricing.
+Query 10:
+
+As seen in the purple density curve graph, most vehicles are from 2012 to 2020.
+Query 11:
+
+There were only 870 out of our records that were above 20,000 dollars, and these were a wide range of different models.
+Query 12:
+
+Like with the transmission types, there are multiple different fuel type options for each model. 
+Predictive Analysis
+Determining the Correlation Between Variables
+
+
+
+
+Before running the correlation matrix our goal was to determine which variables demonstrated stronger relationships to then determine which variables to use when making the linear model. Based on viewing the relationships between the variables we deduced that engine size is the strongest driver of price (+0.73), newer cars cost more (+0.42), and newer cars naturally have lower mileage (-0.73) as some of the most meaningful key insights from this Pairs Analysis. We determined that for our linear regression model price would serve as our response (dependent) variable and engineSize would serve as our independent (predictor) variable.
+
+The Correlation Matrix & Linear Regression Model
+
+
+The results of the linear regression model revealed that  ~53% of the variabity in the dependent variable is explained by the model. Furthermore, when looking at the coefficient (Engine size): For every 1-liter increase in engine size, the model predicts an increase of about $10,673 in car price. When looking at the intercept (-3,189.70) we see that it is not a realistic dollar amount, it would be ($0) that you would price a car, however we recognize that it is necessary to anchor the regression line. 
+	
+Conclusion
+	
+Transforming raw data into meaningful analytical insights required careful attention at every stage of the data mining process. First starting off with the data cleaning, although there were no records lost at the end of the cleaning process some values had to be imputed. There were outlier values such as some records that had over 200 mpg (which is likely not possible), so we did research to find the accurate measurement and adjusted those values accordingly.
+Once the data was cleaned, we developed data visualizations that helped explain the key relationships between the variables. Most notably of these models was our model that captured the relationship between engine size and price. There appeared to be a strong positive relationship between those variables, however this could only be confirmed by a linear regression model analysis which we ran later. Another visualization that revealed interesting information was our Distribution of Prices by Model which revealed that Land Cruisers and the Supra were typically pricier compared to the rest of the models. Overall, the results in the relationships expected to be seen within the models were no surprise; the cars that had higher mileage tended to be less expensive; cars that were newer had less mileage. Furthermore, the data revealed that a majority of the cars were manual which was expected considering the data covered a majority of European models. 
+After running a linear regression model using price as the response variable and engine size as the independent variable it was revealed that engine size was indeed significant in predicting the price of cars. And 53% of the variability was explained by the model suggesting that engine size was a strong predictor of price.
+Overall the insights based off the results from this data can be useful to an auto dealer to help them price any used cars they plan to put up for sale, conversely these insights can be useful to anyone who wishes to sell their used car on their own or to an auto dealer as they will be informed on the estimated market value of their vehicle based off the trends found within the data. Ultimately they can use this information as part of the negotiations to get a fair price on the sale of their vehicle.
+

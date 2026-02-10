@@ -35,7 +35,7 @@
     <style>
         /* Base Settings */
         body {
-            cursor: default; /* Keep default cursor, we add a glow follower instead */
+            cursor: default;
         }
 
         /* Glassmorphism */
@@ -63,12 +63,12 @@
             pointer-events: none;
         }
 
-        /* Mouse Glow Follower */
+        /* Mouse Glow Follower - REDUCED SIZE */
         .mouse-glow {
             position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(10, 25, 47, 0) 70%);
+            width: 200px; /* Reduced by 50% */
+            height: 200px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(10, 25, 47, 0) 70%);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
@@ -76,18 +76,42 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Click Ripple Effect */
+        /* Click Ripple Effect - SYMMETRICAL */
         .click-ripple {
             position: absolute;
-            border: 1px solid rgba(212, 175, 55, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.6);
             border-radius: 50%;
-            animation: ripple-anim 0.6s linear;
+            animation: ripple-anim 0.6s ease-out;
             pointer-events: none;
             z-index: 9999;
+            transform: translate(-50%, -50%); /* Centers the ripple on the click */
         }
         @keyframes ripple-anim {
             0% { width: 0; height: 0; opacity: 1; }
-            100% { width: 100px; height: 100px; opacity: 0; }
+            100% { width: 80px; height: 80px; opacity: 0; }
+        }
+
+        /* Typing Cursor */
+        .cursor-blink {
+            display: inline-block;
+            width: 2px;
+            background-color: #d4af37;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Utility */
@@ -104,7 +128,7 @@
     <canvas id="canvas-bg"></canvas>
     <div id="mouse-glow" class="mouse-glow"></div>
 
-    <nav class="fixed w-full z-50 glass-card border-b-0 top-0">
+    <nav class="fixed w-full z-50 glass-card border-b-0 top-0 reveal-section">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-end md:justify-center items-center">
             
             <div class="hidden md:flex space-x-8 text-sm font-mono text-silver-100">
@@ -132,16 +156,17 @@
     <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6 relative z-10">
         <div class="max-w-4xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
             <div class="text-left flex-1">
-                <p class="font-mono text-gold-400 mb-4 tracking-wide">Hi, my name is</p>
-                <h1 class="font-serif text-5xl md:text-7xl font-bold text-silver-100 mb-4 leading-tight">
-                    Braden Flynn.
-                </h1>
-                <h2 class="font-serif text-3xl md:text-5xl font-bold text-silver-300 mb-6 leading-tight">
-                    Finance & Analytics Professional.
-                </h2>
-                <p class="font-mono text-gold-400 mb-8">University of San Diego</p>
+                <div class="min-h-[160px] md:min-h-[200px]"> <h1 class="font-serif text-5xl md:text-7xl font-bold text-silver-100 mb-4 leading-tight">
+                        <span id="type-name"></span><span class="cursor-blink">|</span>
+                    </h1>
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold text-silver-300 mb-6 leading-tight">
+                        <span id="type-title"></span>
+                    </h2>
+                </div>
                 
-                <div class="flex gap-4">
+                <p class="font-mono text-gold-400 mb-8 reveal-section" style="transition-delay: 1000ms;">University of San Diego</p>
+                
+                <div class="flex gap-4 reveal-section" style="transition-delay: 1200ms;">
                     <a href="#contact" class="px-8 py-4 bg-transparent border border-gold-400 text-gold-400 font-mono text-sm rounded hover:bg-gold-400/10 transition-colors">
                         Get In Touch
                     </a>
@@ -150,14 +175,14 @@
                     </a>
                 </div>
             </div>
-            <div class="relative w-64 h-64 md:w-80 md:h-80 shrink-0">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 shrink-0 reveal-section" style="transition-delay: 500ms;">
                 <div class="absolute inset-0 border-2 border-gold-400 rounded translate-x-4 translate-y-4"></div>
-                <img src="braden-headshot.png" alt="Braden Flynn" class="relative w-full h-full object-cover rounded grayscale hover:grayscale-0 transition-all duration-300">
+                <img src="braden-headshot.png" alt="Braden Flynn" class="relative w-full h-full object-cover rounded shadow-2xl">
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-24 px-6 relative z-10">
+    <section id="about" class="py-24 px-6 relative z-10 reveal-section">
         <div class="max-w-3xl mx-auto">
             <div class="flex items-center mb-12">
                 <span class="font-mono text-gold-400 text-xl mr-2">01.</span>
@@ -177,14 +202,14 @@
 
     <section id="projects" class="py-24 px-6 relative z-10">
         <div class="max-w-5xl mx-auto">
-            <div class="flex items-center mb-12">
+            <div class="flex items-center mb-12 reveal-section">
                 <span class="font-mono text-gold-400 text-xl mr-2">02.</span>
                 <h2 class="font-serif text-3xl font-bold text-silver-100">Featured Projects</h2>
                 <div class="h-[1px] bg-navy-800 flex-grow ml-6"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-card rounded-lg overflow-hidden group flex flex-col">
+                <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
                     <div class="h-48 overflow-hidden relative">
                          <div class="absolute inset-0 bg-navy-900/40 group-hover:bg-transparent transition-all duration-500 z-10"></div>
                         <img src="project-datamining.png" alt="Toyota Project" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
@@ -207,7 +232,7 @@
                     </div>
                 </div>
 
-                <div class="glass-card rounded-lg overflow-hidden group flex flex-col">
+                <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
                     <div class="h-48 overflow-hidden relative">
                         <div class="absolute inset-0 bg-navy-900/40 group-hover:bg-transparent transition-all duration-500 z-10"></div>
                         <img src="Finance-Overview-2.webp" alt="Power BI Dashboard" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
@@ -220,15 +245,18 @@
                             <p class="text-sm mb-4 leading-relaxed text-silver-300">
                                 Developed an interactive Financial Performance Dashboard for <strong>Thermo Fisher Scientific</strong> to track revenue trends, expense management, and profitability metrics to support strategic decision making.
                             </p>
-                            <p class="text-xs italic text-gray-500 border-l-2 border-gold-400 pl-3">
-                                Note: The dashboard shown is a representative sample. Actual project contains confidential Thermo Fisher Scientific financial data.
-                            </p>
                         </div>
-                        <div class="flex flex-wrap gap-3 font-mono text-xs text-gold-400 mt-4">
-                            <span>Power BI</span>
-                            <span>Thermo Fisher</span>
-                            <span>Data Viz</span>
-                            <span>BI</span>
+                        
+                        <div class="mt-6 pt-4 border-t border-silver-300/10">
+                            <div class="flex flex-wrap gap-3 font-mono text-xs text-gold-400 mb-3">
+                                <span>Power BI</span>
+                                <span>Thermo Fisher</span>
+                                <span>Data Viz</span>
+                                <span>BI</span>
+                            </div>
+                            <p class="text-[10px] text-gray-500 italic">
+                                * Disclaimer: The dashboard shown is a representative sample. Actual project contains confidential Thermo Fisher Scientific financial data.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -238,44 +266,44 @@
 
     <section id="skills" class="py-24 px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center mb-12">
+            <div class="flex items-center mb-12 reveal-section">
                 <span class="font-mono text-gold-400 text-xl mr-2">03.</span>
                 <h2 class="font-serif text-3xl font-bold text-silver-100">Skills & Expertise</h2>
                 <div class="h-[1px] bg-navy-800 flex-grow ml-6"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors">
+                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">📊</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Data Analytics</h3>
                     <p class="text-xs font-mono text-silver-300">Data mining, statistical analysis, predictive modeling</p>
                 </div>
 
-                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors">
+                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">💼</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Financial Analysis</h3>
                     <p class="text-xs font-mono text-silver-300">Financial modeling, forecasting, performance analysis</p>
                 </div>
 
-                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors">
+                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">📈</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Data Visualization</h3>
                     <p class="text-xs font-mono text-silver-300">Power BI, ggplot2, visual storytelling</p>
                 </div>
 
-                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors">
+                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">🔍</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Statistical Modeling</h3>
                     <p class="text-xs font-mono text-silver-300">Regression, correlation analysis</p>
                 </div>
 
-                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors">
+                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">💻</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Technical Tools</h3>
                     <p class="text-xs font-mono text-silver-300">Python, R, SQL, Excel, Power BI</p>
                 </div>
 
-                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors">
+                <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">🎯</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Database Querying</h3>
                     <p class="text-xs font-mono text-silver-300">SQL, sqldf, dplyr, complex queries</p>
@@ -284,12 +312,12 @@
         </div>
     </section>
 
-    <section id="contact" class="py-24 px-6 text-center relative z-10">
+    <section id="contact" class="py-24 px-6 text-center relative z-10 reveal-section">
         <div class="max-w-2xl mx-auto">
             <span class="font-mono text-gold-400 text-sm mb-4 block">04. What's Next?</span>
             <h2 class="font-serif text-4xl md:text-5xl font-bold text-silver-100 mb-6">Professional Inquiry</h2>
             <p class="text-lg mb-10 leading-relaxed text-silver-300">
-                I am currently open to new opportunities in Business Analytics and Financial Planning. Whether you have a question or are looking to collaborate, my inbox is open.
+                I am currently open to new opportunities in Business Analytics and Financial Analysis. Whether you have a question or are looking to collaborate, my inbox is open.
             </p>
             
             <a href="mailto:bradengflynn@hotmail.com" 
@@ -316,7 +344,53 @@
     </footer>
 
     <script>
-        // Mobile Menu Logic
+        // --- 1. Typing Effect ---
+        const nameText = "Braden Flynn";
+        const titleText = "Finance & Analytics Professional";
+        const nameElement = document.getElementById('type-name');
+        const titleElement = document.getElementById('type-title');
+
+        async function typeWriter(text, element, delay = 50) {
+            for (let i = 0; i < text.length; i++) {
+                element.textContent += text.charAt(i);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+
+        async function startTyping() {
+            await typeWriter(nameText, nameElement, 80); // Type Name
+            await new Promise(resolve => setTimeout(resolve, 300)); // Brief pause
+            await typeWriter(titleText, titleElement, 40); // Type Title faster
+        }
+        
+        // Start typing on load
+        window.addEventListener('load', startTyping);
+
+
+        // --- 2. Scroll Reveal Animation ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-section').forEach((el) => {
+            observer.observe(el);
+        });
+
+
+        // --- 3. Interactive UI Logic ---
+        
+        // Mobile Menu
         const btn = document.getElementById('nav-toggle');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => {
@@ -334,6 +408,7 @@
         document.addEventListener('click', (e) => {
             const ripple = document.createElement('div');
             ripple.className = 'click-ripple';
+            // Set position based on click coordinates
             ripple.style.left = e.pageX + 'px';
             ripple.style.top = e.pageY + 'px';
             document.body.appendChild(ripple);

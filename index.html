@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Braden Flynn - Finance & Analytics student at University of San Diego. Portfolio of data analytics projects.">
+    <meta name="description" content="Braden Flynn - Finance & Analytics Professional. Portfolio of data analytics projects and financial modeling.">
     <meta name="author" content="Braden Flynn">
     <title>Braden Flynn | Finance & Analytics</title>
     
@@ -33,7 +33,12 @@
     </script>
 
     <style>
-        /* Glassmorphism & Animations */
+        /* Base Settings */
+        body {
+            cursor: default; /* Keep default cursor, we add a glow follower instead */
+        }
+
+        /* Glassmorphism */
         .glass-card {
             background: rgba(17, 34, 64, 0.7);
             backdrop-filter: blur(12px);
@@ -46,24 +51,61 @@
             border-color: rgba(212, 175, 55, 0.4);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
-        .text-gradient-gold {
-            background: linear-gradient(to right, #e6f1ff, #d4af37);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        /* Canvas Background */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
+
+        /* Mouse Glow Follower */
+        .mouse-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(10, 25, 47, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Click Ripple Effect */
+        .click-ripple {
+            position: absolute;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 50%;
+            animation: ripple-anim 0.6s linear;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        @keyframes ripple-anim {
+            0% { width: 0; height: 0; opacity: 1; }
+            100% { width: 100px; height: 100px; opacity: 0; }
+        }
+
+        /* Utility */
+        .btn-pulse { animation: subtle-pulse 3s infinite; }
         @keyframes subtle-pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
             50% { box-shadow: 0 0 0 4px rgba(212, 175, 55, 0); }
         }
-        .btn-pulse { animation: subtle-pulse 3s infinite; }
     </style>
 </head>
 
-<body class="bg-navy-900 text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900">
+<body class="bg-navy-900 text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900 overflow-x-hidden">
+
+    <canvas id="canvas-bg"></canvas>
+    <div id="mouse-glow" class="mouse-glow"></div>
 
     <nav class="fixed w-full z-50 glass-card border-b-0 top-0">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#hero" class="font-serif text-2xl font-bold text-silver-100 tracking-tight">BF.</a>
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-end md:justify-center items-center">
             
             <div class="hidden md:flex space-x-8 text-sm font-mono text-silver-100">
                 <a href="#about" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">01.</span> About</a>
@@ -87,7 +129,7 @@
         </div>
     </nav>
 
-    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6">
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6 relative z-10">
         <div class="max-w-4xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
             <div class="text-left flex-1">
                 <p class="font-mono text-gold-400 mb-4 tracking-wide">Hi, my name is</p>
@@ -95,7 +137,7 @@
                     Braden Flynn.
                 </h1>
                 <h2 class="font-serif text-3xl md:text-5xl font-bold text-silver-300 mb-6 leading-tight">
-                    Finance & Analytics Student.
+                    Finance & Analytics Professional.
                 </h2>
                 <p class="font-mono text-gold-400 mb-8">University of San Diego</p>
                 
@@ -103,8 +145,8 @@
                     <a href="#contact" class="px-8 py-4 bg-transparent border border-gold-400 text-gold-400 font-mono text-sm rounded hover:bg-gold-400/10 transition-colors">
                         Get In Touch
                     </a>
-                    <a href="resume.pdf" target="_blank" class="px-8 py-4 bg-navy-800 border border-transparent text-silver-100 font-mono text-sm rounded hover:bg-navy-700 transition-colors">
-                        Resume
+                    <a href="resume.pdf" target="_blank" class="px-8 py-4 bg-navy-800 border border-gold-400 text-silver-100 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all duration-300 shadow-lg hover:shadow-gold-400/20">
+                        View Resume
                     </a>
                 </div>
             </div>
@@ -115,7 +157,7 @@
         </div>
     </section>
 
-    <section id="about" class="py-24 px-6 bg-navy-800/50">
+    <section id="about" class="py-24 px-6 relative z-10">
         <div class="max-w-3xl mx-auto">
             <div class="flex items-center mb-12">
                 <span class="font-mono text-gold-400 text-xl mr-2">01.</span>
@@ -124,7 +166,7 @@
             </div>
             <div class="text-lg leading-relaxed space-y-6">
                 <p>
-                    I'm a Finance and Analytics major at the University of San Diego, passionate about leveraging data-driven insights to solve complex business problems. With a strong foundation in financial analysis, statistical modeling, and business intelligence, I combine analytical rigor with creative problem-solving to deliver impactful solutions.
+                    I'm a Finance and Analytics professional at the University of San Diego, passionate about leveraging data-driven insights to solve complex business problems. With a strong foundation in financial analysis, statistical modeling, and business intelligence, I combine analytical rigor with creative problem-solving to deliver impactful solutions.
                 </p>
                 <p>
                     My academic journey has equipped me with expertise in data mining, financial modeling, and visualization tools. I thrive on transforming raw data into actionable insights that drive strategic decision-making and business growth.
@@ -133,7 +175,7 @@
         </div>
     </section>
 
-    <section id="projects" class="py-24 px-6">
+    <section id="projects" class="py-24 px-6 relative z-10">
         <div class="max-w-5xl mx-auto">
             <div class="flex items-center mb-12">
                 <span class="font-mono text-gold-400 text-xl mr-2">02.</span>
@@ -142,18 +184,21 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-card rounded-lg overflow-hidden group">
-                    <div class="h-48 overflow-hidden">
-                        <img src="project-datamining.png" alt="Toyota Project" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                <div class="glass-card rounded-lg overflow-hidden group flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                         <div class="absolute inset-0 bg-navy-900/40 group-hover:bg-transparent transition-all duration-500 z-10"></div>
+                        <img src="project-datamining.png" alt="Toyota Project" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
                     </div>
-                    <div class="p-8">
-                        <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
-                            Toyota Used Cars Price Prediction
-                        </h3>
-                        <p class="text-sm mb-6 leading-relaxed">
-                            Analyzed 6,738 vehicle records to predict pricing using linear regression. Identified engine size as the strongest driver (R² = 0.53), correlating a 1L increase to ~$10k price increase.
-                        </p>
-                        <div class="flex flex-wrap gap-3 font-mono text-xs text-gold-400">
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
+                                Toyota Price Prediction Model
+                            </h3>
+                            <p class="text-sm mb-4 leading-relaxed text-silver-300">
+                                Analyzed 6,738 vehicle records to predict pricing using linear regression. Identified engine size as the strongest driver (R² = 0.53), correlating a 1L increase to ~$10k price increase.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-3 font-mono text-xs text-gold-400 mt-4">
                             <span>R Programming</span>
                             <span>Linear Regression</span>
                             <span>SQL</span>
@@ -162,20 +207,26 @@
                     </div>
                 </div>
 
-                <div class="glass-card rounded-lg overflow-hidden group">
-                    <div class="h-48 overflow-hidden">
-                        <img src="Finance-Overview-2.webp" alt="Power BI Dashboard" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                <div class="glass-card rounded-lg overflow-hidden group flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-navy-900/40 group-hover:bg-transparent transition-all duration-500 z-10"></div>
+                        <img src="Finance-Overview-2.webp" alt="Power BI Dashboard" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
                     </div>
-                    <div class="p-8">
-                        <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
-                            Financial Analytics Dashboard
-                        </h3>
-                        <p class="text-sm mb-6 leading-relaxed">
-                            Interactive Power BI dashboard for financial performance tracking. Dynamic visualizations for revenue trends, expense management, and profitability metrics.
-                        </p>
-                        <div class="flex flex-wrap gap-3 font-mono text-xs text-gold-400">
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
+                                Financial Analytics Dashboard
+                            </h3>
+                            <p class="text-sm mb-4 leading-relaxed text-silver-300">
+                                Developed an interactive Financial Performance Dashboard for <strong>Thermo Fisher Scientific</strong> to track revenue trends, expense management, and profitability metrics to support strategic decision making.
+                            </p>
+                            <p class="text-xs italic text-gray-500 border-l-2 border-gold-400 pl-3">
+                                Note: The dashboard shown is a representative sample. Actual project contains confidential Thermo Fisher Scientific financial data.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-3 font-mono text-xs text-gold-400 mt-4">
                             <span>Power BI</span>
-                            <span>Financial Analysis</span>
+                            <span>Thermo Fisher</span>
                             <span>Data Viz</span>
                             <span>BI</span>
                         </div>
@@ -185,7 +236,7 @@
         </div>
     </section>
 
-    <section id="skills" class="py-24 px-6 bg-navy-800/50">
+    <section id="skills" class="py-24 px-6 relative z-10">
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center mb-12">
                 <span class="font-mono text-gold-400 text-xl mr-2">03.</span>
@@ -233,40 +284,125 @@
         </div>
     </section>
 
-    <section id="contact" class="py-24 px-6 text-center">
+    <section id="contact" class="py-24 px-6 text-center relative z-10">
         <div class="max-w-2xl mx-auto">
             <span class="font-mono text-gold-400 text-sm mb-4 block">04. What's Next?</span>
-            <h2 class="font-serif text-4xl md:text-5xl font-bold text-silver-100 mb-6">Get In Touch</h2>
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-silver-100 mb-6">Professional Inquiry</h2>
             <p class="text-lg mb-10 leading-relaxed text-silver-300">
-                I'm always interested in new opportunities. Feel free to reach out via email or LinkedIn!
+                I am currently open to new opportunities in Business Analytics and Financial Planning. Whether you have a question or are looking to collaborate, my inbox is open.
             </p>
             
-            <a href="mailto:bradengflynn@hotmail.com?subject=Inquiry%20regarding%20Braden%20Flynn's%20Portfolio&body=Hi%20Braden,%0D%0A%0D%0AI%20was%20reviewing%20your%20portfolio%20and%20would%20love%20to%20connect." 
+            <a href="mailto:bradengflynn@hotmail.com" 
                class="inline-block px-8 py-4 border border-gold-400 text-gold-400 font-mono text-sm rounded btn-pulse hover:bg-gold-400/10 transition-colors">
-                Say Hello
+                Connect for Collaboration
             </a>
 
-            <div class="mt-12 flex justify-center space-x-8">
-                <a href="https://www.linkedin.com/in/braden-flynn/" target="_blank" class="text-silver-300 hover:text-gold-400 transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg>
+            <div class="mt-16 flex flex-col md:flex-row justify-center items-center gap-6">
+                <a href="https://www.linkedin.com/in/braden-flynn/" target="_blank" class="flex items-center space-x-3 px-6 py-3 border border-navy-800 bg-navy-800/50 rounded hover:border-gold-400 hover:text-gold-400 transition-all duration-300 group w-full md:w-auto justify-center">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg>
+                    <span class="font-mono text-sm">LinkedIn Profile</span>
                 </a>
-                <a href="mailto:bradengflynn@hotmail.com" class="text-silver-300 hover:text-gold-400 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                
+                <a href="mailto:bradengflynn@hotmail.com" class="flex items-center space-x-3 px-6 py-3 border border-navy-800 bg-navy-800/50 rounded hover:border-gold-400 hover:text-gold-400 transition-all duration-300 group w-full md:w-auto justify-center">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span class="font-mono text-sm">bradengflynn@hotmail.com</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="py-8 text-center text-xs font-mono text-silver-300 border-t border-navy-800">
+    <footer class="py-8 text-center text-xs font-mono text-silver-300 border-t border-navy-800 relative z-10">
         <p>&copy; 2026 Braden Flynn. All rights reserved.</p>
     </footer>
 
     <script>
+        // Mobile Menu Logic
         const btn = document.getElementById('nav-toggle');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
         });
+
+        // Mouse Glow Follower
+        const glow = document.getElementById('mouse-glow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // Click Ripple Effect
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = e.pageX + 'px';
+            ripple.style.top = e.pageY + 'px';
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
+        // Canvas "Stealth Wealth" Stardust Background
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2; // Very small particles
+                this.speedX = (Math.random() * 0.2) - 0.1; // Extremely slow movement
+                this.speedY = (Math.random() * 0.2) - 0.1;
+                this.opacity = Math.random() * 0.5; // Low opacity
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                // Wrap around screen
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; // Gold color
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 15000; // Sparse distribution
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        init();
+        animate();
     </script>
 </body>
 </html>

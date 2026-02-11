@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Analysis | Braden Flynn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#0a192f', 800: '#112240', 950: '#020c1b' },
+                        gold: { 400: '#d4af37', 500: '#c5a028' },
+                        silver: { 100: '#e6f1ff', 300: '#8892b0' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a192f;
+        }
+
+        .glass-card {
+            background: rgba(17, 34, 64, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+
+<body class="text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900">
+    <nav class="fixed w-full z-50 glass-card border-b-0 top-0">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-mono text-gold-400 hover:text-silver-100 transition-colors">← Back to
+                Portfolio</a>
+            <div class="font-mono text-xs text-silver-300 uppercase tracking-widest">Case Study: Toyota Pricing</div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-silver-100 mb-6">Toyota Used Car Pricing Model
+            </h1>
+            <p class="text-xl text-gold-400 font-mono mb-8">What exactly makes a used Toyota more expensive?</p>
+        </div>
+    </header>
+
+    <main class="pb-24 px-6">
+        <div class="max-w-4xl mx-auto space-y-16">
+            <!-- Part 1: The Goal -->
+            <section class="glass-card p-8 rounded-lg">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-6 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">01.</span> The Goal
+                </h2>
+                <p class="text-lg leading-relaxed mb-6">
+                    In this project, I analyzed a dataset of 6,738 used Toyota vehicles to figure out the most important
+                    factors that drive up a car's price. My objective was to build a tool that helps a buyer or seller
+                    quickly estimate a fair price based on simple specs like engine size and age.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                    <div class="p-6 border border-silver-300/10 rounded">
+                        <label class="text-xs font-mono text-gold-400 uppercase">Input</label>
+                        <p class="text-silver-100">6,738 vehicle records containing mileage, fuel type, engine size, and
+                            model year.</p>
+                    </div>
+                    <div class="p-6 border border-silver-300/10 rounded">
+                        <label class="text-xs font-mono text-gold-400 uppercase">Output</label>
+                        <p class="text-silver-100">A predictive formula that estimates car value with a quantified
+                            "confidence score."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2: How I Got the Numbers -->
+            <section>
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">02.</span> How I Got the Numbers
+                </h2>
+                <div class="space-y-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">1. Fixing "Impossible" Data</h3>
+                            <p>Data is rarely perfect. During the cleaning phase, I found cars listed with over 200
+                                MPG—which isn't physically possible for these models! I researched the correct
+                                manufacturer specs and fixed these errors to ensure the final model wasn't skewed by
+                                "dirty" data.</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <img src="project-datamining.png" alt="Data Cleaning Insight" class="w-full h-auto rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="bg-navy-950 p-8 rounded-lg border border-gold-400/20 order-2 md:order-1">
+                            <p class="font-mono text-gold-400 text-sm mb-4"># The Formula</p>
+                            <p class="text-2xl font-bold text-silver-100 italic">"For every 1 liter of engine size
+                                added, the car's price jumps by ~$10,673."</p>
+                        </div>
+                        <div class="space-y-4 order-1 md:order-2">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">2. Finding the Trend (Linear
+                                Regression)</h3>
+                            <p>I utilized a technique called "Linear Regression." Imagine drawing a straight line
+                                through a cloud of data points to find the average path. This line told us the exact
+                                dollar value of engine power: every 1-liter increase in engine size correlates to
+                                roughly a $10.6k increase in price.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">3. The Confidence Score (R²)</h3>
+                            <p>How much can we trust this model? I calculated the "Rnd-Squared" value, which I call the
+                                Confidence Score. It came out to <strong>53%</strong>. This means that half of a car's
+                                price variation is determined <em>just</em> by its engine size, while the other half is
+                                things like condition, color, and location.</p>
+                        </div>
+                        <div class="p-6 glass-card rounded-lg text-center">
+                            <div class="text-4xl font-bold text-gold-400 mb-2">53%</div>
+                            <div class="text-xs font-mono uppercase text-silver-300">Predictive Accuracy</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 3: The Findings -->
+            <section class="glass-card p-8 rounded-lg">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">03.</span> Key Takeaways
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-navy-900 border border-silver-300/10 rounded">
+                        <h4 class="text-gold-400 font-bold mb-3">Hybrid Premium</h4>
+                        <p class="text-xs leading-relaxed">Hybrid engines fetched the highest average price compared to
+                            gas or diesel counterparts.</p>
+                    </div>
+                    <div class="p-6 bg-navy-900 border border-silver-300/10 rounded">
+                        <h4 class="text-gold-400 font-bold mb-3">Auto > Manual</h4>
+                        <p class="text-xs leading-relaxed">Automatic transmissions significantly outperformed manuals in
+                            resale value across all models.</p>
+                    </div>
+                    <div class="p-6 bg-navy-900 border border-silver-300/10 rounded">
+                        <h4 class="text-gold-400 font-bold mb-3">Model Kings</h4>
+                        <p class="text-xs leading-relaxed">The Supra and Land Cruiser are the most expensive, but also
+                            have the most price volatility.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="pt-16 text-center">
+                <a href="index.html"
+                    class="inline-block px-10 py-4 border-2 border-gold-400 text-gold-400 font-mono text-sm font-bold rounded hover:bg-gold-400 hover:text-navy-900 transition-all">
+                    Back to Portfolio
+                </a>
+            </footer>
+        </div>
+    </main>
+</body>
+
+</html>

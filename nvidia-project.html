@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA Analysis | Braden Flynn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#0a192f', 800: '#112240', 950: '#020c1b' },
+                        gold: { 400: '#d4af37', 500: '#c5a028' },
+                        silver: { 100: '#e6f1ff', 300: '#8892b0' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a192f;
+        }
+
+        .glass-card {
+            background: rgba(17, 34, 64, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+
+<body class="text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900">
+    <nav class="fixed w-full z-50 glass-card border-b-0 top-0">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-mono text-gold-400 hover:text-silver-100 transition-colors">← Back to
+                Portfolio</a>
+            <div class="font-mono text-xs text-silver-300 uppercase tracking-widest">Case Study: NVIDIA Analysis</div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-silver-100 mb-6">NVIDIA Business Case & Valuation
+            </h1>
+            <p class="text-xl text-gold-400 font-mono mb-8">Using Python to Simluate Big Business Decisions</p>
+        </div>
+    </header>
+
+    <main class="pb-24 px-6">
+        <div class="max-w-4xl mx-auto space-y-16">
+            <!-- Part 1: The Project -->
+            <section class="glass-card p-8 rounded-lg">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-6 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">01.</span> The Goal
+                </h2>
+                <p class="text-lg leading-relaxed mb-6">
+                    NVIDIA is one of the most talked-about companies in the world. I wanted to build a model that looks
+                    past the hype and uses real financial math to see if two things make sense:
+                </p>
+                <ol class="list-decimal list-inside space-y-4 text-silver-100 ml-4 mb-8">
+                    <li><strong>Hiring:</strong> Does it actually pay off to hire 2,000 new engineers right now?</li>
+                    <li><strong>Stock Price:</strong> Is NVIDIA really worth $190 per share, or is that just market
+                        excitement?</li>
+                </ol>
+            </section>
+
+            <!-- Part 2: How I Got the Numbers -->
+            <section>
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">02.</span> How I Got the Numbers
+                </h2>
+                <div class="space-y-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">1. Calculating the "Hurdle Rate"
+                                (WACC)</h3>
+                            <p>To know if an investment is good, you first have to know how much profit the company
+                                <em>needs</em> to make just to pay its bills and keep investors happy. I combined the
+                                interest rates on government bonds with a "risk score" for NVIDIA's stock. I found that
+                                NVIDIA needs to make at least <strong>11.3% profit</strong> on any new project for it to
+                                be worth doing.</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <img src="visual_1_investment_decision.png" alt="ROIC Analysis"
+                                class="w-full h-auto rounded">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="glass-card p-4 rounded-lg order-2 md:order-1">
+                            <img src="visual_2_valuation_bridge.png" alt="Valuation" class="w-full h-auto rounded">
+                        </div>
+                        <div class="space-y-4 order-1 md:order-2">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">2. The "Time Machine" (DCF)</h3>
+                            <p>I built a "Discounted Cash Flow" (DCF) model. Think of this as a time machine for money.
+                                I predicted how much cash NVIDIA will likely generate over the next 10 years, and then
+                                calculated what that future cash is worth in <em>today's dollars</em>. This revealed a
+                                fair stock price of about <strong>$108</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">3. The 3-Year "Learning Curve"</h3>
+                            <p>Engineers aren't 100% productive on their first day. My model simulates a "ramp-up"
+                                period where the new hires gradually contribute more revenue over 3 years. Even with
+                                this conservative start, the hiring plan still earns a <strong>37% return</strong>,
+                                which is way above our 11.3% hurdle rate from Step 1.</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <img src="visual_3_scenario_matrix.png" alt="Scenario Matrix" class="w-full h-auto rounded">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 3: The Conclusion -->
+            <section class="glass-card p-8 rounded-lg bg-navy-800/40 border-gold-400/20">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-6 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">03.</span> Final Verdict
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 border border-silver-300/10 rounded bg-navy-950/50">
+                        <h4 class="text-gold-400 font-bold mb-2">The Business Move: YES</h4>
+                        <p class="text-sm">Hiring the 2,000 engineers is a massive win. For every dollar spent on them,
+                            the company generates significantly more in value. It's an efficient use of capital.</p>
+                    </div>
+                    <div class="p-6 border border-silver-300/10 rounded bg-navy-950/50">
+                        <h4 class="text-gold-400 font-bold mb-2">The Stock Price: CAUTION</h4>
+                        <p class="text-sm">At $190, the stock is "expensive." It assumes NVIDIA will grow at 32% every
+                            single year for the next decade. While possible, it leaves very little room for error.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="pt-16 text-center">
+                <a href="index.html"
+                    class="inline-block px-10 py-4 border-2 border-gold-400 text-gold-400 font-mono text-sm font-bold rounded hover:bg-gold-400 hover:text-navy-900 transition-all">
+                    Back to Portfolio
+                </a>
+            </footer>
+        </div>
+    </main>
+</body>
+
+</html>

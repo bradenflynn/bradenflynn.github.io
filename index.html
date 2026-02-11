@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Braden Flynn - Finance & Analytics Professional. Portfolio of data analytics projects and financial modeling.">
+    <meta name="description"
+        content="Braden Flynn - Finance & Analytics Professional. Portfolio of data analytics projects and financial modeling.">
     <meta name="author" content="Braden Flynn">
     <title>Braden Flynn | Finance & Analytics</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -46,12 +50,15 @@
             border: 1px solid rgba(212, 175, 55, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         /* Stronger Lift & Glow on Hover */
         .glass-card:hover {
-            transform: translateY(-8px); /* Higher lift */
-            border-color: rgba(212, 175, 55, 0.6); /* brighter gold border */
-            background: rgba(23, 42, 69, 0.85); /* lighter background */
+            transform: translateY(-8px);
+            /* Higher lift */
+            border-color: rgba(212, 175, 55, 0.6);
+            /* brighter gold border */
+            background: rgba(23, 42, 69, 0.85);
+            /* lighter background */
             box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
@@ -72,7 +79,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 15%; /* Top 15% of screen */
+            height: 15%;
+            /* Top 15% of screen */
             background: linear-gradient(to bottom, #020c1b 0%, rgba(10, 25, 47, 0) 100%);
             z-index: -1;
             pointer-events: none;
@@ -96,9 +104,17 @@
             background-color: #d4af37;
             animation: blink 1s infinite;
         }
+
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         /* Scroll Reveal Animation */
@@ -107,40 +123,59 @@
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
+
         .reveal-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         /* Utility */
-        .btn-pulse { animation: subtle-pulse 3s infinite; }
+        .btn-pulse {
+            animation: subtle-pulse 3s infinite;
+        }
+
         @keyframes subtle-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            50% { box-shadow: 0 0 0 4px rgba(212, 175, 55, 0); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 4px rgba(212, 175, 55, 0);
+            }
         }
     </style>
 </head>
 
-<body class="bg-navy-900 text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900 overflow-x-hidden">
+<body
+    class="bg-navy-900 text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900 overflow-x-hidden">
 
     <div class="depth-overlay"></div>
     <canvas id="canvas-bg"></canvas>
-    
+
     <nav class="fixed w-full z-50 glass-card border-b-0 top-0 reveal-section">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-end md:justify-center items-center">
-            
+
             <div class="hidden md:flex space-x-8 text-sm font-mono text-silver-100">
-                <a href="#about" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">01.</span> About</a>
-                <a href="#projects" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">02.</span> Projects</a>
-                <a href="#skills" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">03.</span> Skills</a>
-                <a href="#contact" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">04.</span> Contact</a>
+                <a href="#about" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">01.</span>
+                    About</a>
+                <a href="#projects" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">02.</span>
+                    Projects</a>
+                <a href="#skills" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">03.</span>
+                    Skills</a>
+                <a href="#contact" class="hover:text-gold-400 transition-colors"><span class="text-gold-400">04.</span>
+                    Contact</a>
             </div>
 
             <button id="nav-toggle" class="md:hidden text-gold-400 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
             </button>
         </div>
-        
+
         <div id="mobile-menu" class="hidden md:hidden bg-navy-800 px-6 py-4 border-t border-gray-700">
             <div class="flex flex-col space-y-4 font-mono text-sm text-silver-100">
                 <a href="#about" class="hover:text-gold-400">About</a>
@@ -154,8 +189,8 @@
     <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6 relative z-10">
         <div class="max-w-4xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
             <div class="text-left flex-1">
-                
-                <div class="min-h-[160px] md:min-h-[200px]"> 
+
+                <div class="min-h-[160px] md:min-h-[200px]">
                     <h1 class="font-serif text-5xl md:text-7xl font-bold text-silver-100 mb-4 leading-tight">
                         <span id="type-name"></span>
                     </h1>
@@ -163,21 +198,25 @@
                         <span id="type-title"></span><span id="cursor" class="cursor-blink">|</span>
                     </h2>
                 </div>
-                
-                <p class="font-mono text-gold-400 mb-8 reveal-section" style="transition-delay: 1000ms;">Senior at the University of San Diego</p>
-                
+
+                <p class="font-mono text-gold-400 mb-8 reveal-section" style="transition-delay: 1000ms;">Senior at the
+                    University of San Diego</p>
+
                 <div class="flex gap-4 reveal-section" style="transition-delay: 1200ms;">
-                    <a href="#contact" class="px-8 py-4 bg-navy-800 border border-gold-400 text-silver-100 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all duration-300 shadow-lg hover:shadow-gold-400/20">
+                    <a href="#contact"
+                        class="px-8 py-4 bg-navy-800 border border-gold-400 text-silver-100 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all duration-300 shadow-lg hover:shadow-gold-400/20">
                         Get In Touch
                     </a>
-                    <a href="resume.pdf" target="_blank" class="px-8 py-4 bg-navy-800 border border-gold-400 text-silver-100 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all duration-300 shadow-lg hover:shadow-gold-400/20">
+                    <a href="resume.pdf" target="_blank"
+                        class="px-8 py-4 bg-navy-800 border border-gold-400 text-silver-100 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all duration-300 shadow-lg hover:shadow-gold-400/20">
                         View Resume
                     </a>
                 </div>
             </div>
             <div class="relative w-64 h-64 md:w-80 md:h-80 shrink-0 reveal-section" style="transition-delay: 500ms;">
                 <div class="absolute inset-0 border-2 border-gold-400 rounded translate-x-4 translate-y-4"></div>
-                <img src="braden-headshot.png" alt="Braden Flynn" class="relative w-full h-full object-cover rounded shadow-2xl">
+                <img src="braden-headshot.png" alt="Braden Flynn"
+                    class="relative w-full h-full object-cover rounded shadow-2xl">
             </div>
         </div>
     </section>
@@ -191,10 +230,15 @@
             </div>
             <div class="text-lg leading-relaxed space-y-6">
                 <p>
-                    I'm a Finance and Analytics professional at the University of San Diego, passionate about leveraging data-driven insights to solve complex business problems. With a strong foundation in financial analysis, statistical modeling, and business intelligence, I combine analytical rigor with creative problem-solving to deliver impactful solutions.
+                    I'm a Finance and Analytics professional at the University of San Diego, passionate about leveraging
+                    data-driven insights to solve complex business problems. With a strong foundation in financial
+                    analysis, statistical modeling, and business intelligence, I combine analytical rigor with creative
+                    problem-solving to deliver impactful solutions.
                 </p>
                 <p>
-                    My academic journey has equipped me with expertise in data mining, financial modeling, and visualization tools. I thrive on transforming raw data into actionable insights that drive strategic decision-making and business growth.
+                    My academic journey has equipped me with expertise in data mining, financial modeling, and
+                    visualization tools. I thrive on transforming raw data into actionable insights that drive strategic
+                    decision-making and business growth.
                 </p>
             </div>
         </div>
@@ -211,19 +255,25 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
                     <div class="h-72 bg-navy-950 flex items-center justify-center relative overflow-hidden">
-                         <div class="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-all duration-500 z-10"></div>
-                        <img src="project-datamining.png" alt="Toyota Project" class="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-all duration-500 z-10">
+                        </div>
+                        <img src="project-datamining.png" alt="Toyota Project"
+                            class="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
                     </div>
                     <div class="p-8 flex-grow flex flex-col justify-between">
                         <div>
-                            <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
+                            <h3
+                                class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
                                 Toyota Price Prediction Model
                             </h3>
                             <p class="text-sm mb-4 leading-relaxed text-silver-300">
-                                Analyzed 6,738 vehicle records to predict pricing using linear regression. Identified engine size as the strongest driver (R² = 0.53), correlating a 1L increase to ~$10k price increase.
+                                Analyzed 6,738 vehicle records to predict pricing using linear regression. Identified
+                                engine size as the strongest driver (R² = 0.53), correlating a 1L increase to ~$10k
+                                price increase.
                             </p>
                         </div>
-                        
+
                         <div class="mt-6 pt-4 border-t border-silver-300/10">
                             <div class="flex flex-wrap gap-5 font-mono text-xs text-gold-400 mb-3">
                                 <span>R Programming</span>
@@ -238,19 +288,25 @@
 
                 <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
                     <div class="h-72 bg-navy-950 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-all duration-500 z-10"></div>
-                        <img src="Finance-Overview-2.webp" alt="Power BI Dashboard" class="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-all duration-500 z-10">
+                        </div>
+                        <img src="Finance-Overview-2.webp" alt="Power BI Dashboard"
+                            class="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
                     </div>
                     <div class="p-8 flex-grow flex flex-col justify-between">
                         <div>
-                            <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
+                            <h3
+                                class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
                                 Financial Analytics Dashboard
                             </h3>
                             <p class="text-sm mb-4 leading-relaxed text-silver-300">
-                                Developed an interactive Financial Performance Dashboard for <strong>Thermo Fisher Scientific</strong> to track revenue trends, expense management, and profitability metrics to support strategic decision making.
+                                Developed an interactive Financial Performance Dashboard for <strong>Thermo Fisher
+                                    Scientific</strong> to track revenue trends, expense management, and profitability
+                                metrics to support strategic decision making.
                             </p>
                         </div>
-                        
+
                         <div class="mt-6 pt-4 border-t border-silver-300/10">
                             <div class="flex flex-wrap gap-5 font-mono text-xs text-gold-400 mb-3">
                                 <span>Power BI</span>
@@ -259,7 +315,8 @@
                                 <span>BI</span>
                             </div>
                             <p class="text-[10px] text-gray-500 italic">
-                                * Disclaimer: The dashboard shown is a representative sample. Actual project contains confidential Thermo Fisher Scientific financial data.
+                                * Disclaimer: The dashboard shown is a representative sample. Actual project contains
+                                confidential Thermo Fisher Scientific financial data.
                             </p>
                         </div>
                     </div>
@@ -267,19 +324,26 @@
 
                 <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
                     <div class="h-72 bg-navy-950 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-all duration-500 z-10"></div>
-                        <img src="nvidia_portfolio_dashboard.png" alt="NVIDIA Financial Model" class="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-all duration-500 z-10">
+                        </div>
+                        <img src="nvidia_portfolio_dashboard.png" alt="NVIDIA Financial Model"
+                            class="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
                     </div>
                     <div class="p-8 flex-grow flex flex-col justify-between">
                         <div>
-                            <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
+                            <h3
+                                class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
                                 NVIDIA Institutional Valuation
                             </h3>
                             <p class="text-sm mb-4 leading-relaxed text-silver-300">
-                                Developed a dual-layered investment framework evaluating NVIDIA's headcount expansion ROI (37% ROIC vs 11.3% WACC) and a 10-year two-stage DCF valuation. Identified a 77% speculative premium at $190, requiring 32% sustained revenue CAGR to justify.
+                                Developed a Python financial model to stress-test NVIDIA's hiring strategy and $190
+                                stock valuation. Proved that adding 2,000 engineers is highly profitable with a 37%
+                                return on investment. Identified a 77% speculative premium in the current price,
+                                requiring 32% sustained annual growth to justify.
                             </p>
                         </div>
-                        
+
                         <div class="mt-6 pt-4 border-t border-silver-300/10">
                             <div class="flex flex-wrap gap-5 font-mono text-xs text-gold-400 mb-3">
                                 <span>Python</span>
@@ -307,13 +371,15 @@
                 <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">📊</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Data Analytics</h3>
-                    <p class="text-xs font-mono text-silver-300">Data mining, statistical analysis, predictive modeling</p>
+                    <p class="text-xs font-mono text-silver-300">Data mining, statistical analysis, predictive modeling
+                    </p>
                 </div>
 
                 <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
                     <div class="text-2xl mb-4">💼</div>
                     <h3 class="font-serif text-lg font-bold text-silver-100 mb-2">Financial Analysis</h3>
-                    <p class="text-xs font-mono text-silver-300">Financial modeling, forecasting, performance analysis</p>
+                    <p class="text-xs font-mono text-silver-300">Financial modeling, forecasting, performance analysis
+                    </p>
                 </div>
 
                 <div class="glass-card p-6 rounded hover:bg-navy-800 transition-colors reveal-section">
@@ -348,18 +414,31 @@
             <span class="font-mono text-gold-400 text-sm mb-4 block">04. What's Next?</span>
             <h2 class="font-serif text-4xl md:text-5xl font-bold text-silver-100 mb-6">Professional Inquiry</h2>
             <p class="text-lg mb-10 leading-relaxed text-silver-300">
-                I am currently open to new opportunities in Business Analytics and Financial Analysis. Whether you have a question or are looking to collaborate, my inbox is open.
-            
-            </a>
+                I am currently open to new opportunities in Business Analytics and Financial Analysis. Whether you have
+                a question or are looking to collaborate, my inbox is open.
+
+                </a>
 
             <div class="mt-16 flex flex-col md:flex-row justify-center items-center gap-6">
-                <a href="https://www.linkedin.com/in/braden-flynn/" target="_blank" class="flex items-center space-x-3 px-6 py-3 border border-gold-400 bg-navy-800/50 rounded hover:border-gold-400 hover:text-gold-400 transition-all duration-300 group w-full md:w-auto justify-center">
-                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg>
+                <a href="https://www.linkedin.com/in/braden-flynn/" target="_blank"
+                    class="flex items-center space-x-3 px-6 py-3 border border-gold-400 bg-navy-800/50 rounded hover:border-gold-400 hover:text-gold-400 transition-all duration-300 group w-full md:w-auto justify-center">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
+                        </path>
+                    </svg>
                     <span class="font-mono text-sm">LinkedIn Profile</span>
                 </a>
-                
-                <a href="mailto:bradengflynn@hotmail.com" class="flex items-center space-x-3 px-6 py-3 border border-gold-400 bg-navy-800/50 rounded hover:border-gold-400 hover:text-gold-400 transition-all duration-300 group w-full md:w-auto justify-center">
-                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+
+                <a href="mailto:bradengflynn@hotmail.com"
+                    class="flex items-center space-x-3 px-6 py-3 border border-gold-400 bg-navy-800/50 rounded hover:border-gold-400 hover:text-gold-400 transition-all duration-300 group w-full md:w-auto justify-center">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
                     <span class="font-mono text-sm">bradengflynn@hotmail.com</span>
                 </a>
             </div>
@@ -389,13 +468,13 @@
             await typeWriter(nameText, nameElement, 80); // Type Name
             await new Promise(resolve => setTimeout(resolve, 300)); // Brief pause
             await typeWriter(titleText, titleElement, 40); // Type Title faster
-            
+
             // Remove cursor after typing
             if (cursorElement) {
                 cursorElement.style.display = 'none';
             }
         }
-        
+
         // Start typing on load
         window.addEventListener('load', startTyping);
 
@@ -422,7 +501,7 @@
 
 
         // --- 3. Interactive UI Logic ---
-        
+
         // Mobile Menu
         const btn = document.getElementById('nav-toggle');
         const menu = document.getElementById('mobile-menu');
@@ -433,19 +512,19 @@
         // Click Stardust Scatter
         document.addEventListener('click', (e) => {
             const particleCount = 12; // Number of particles
-            
+
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'stardust-particle';
-                
+
                 // Position at click
                 particle.style.left = e.pageX + 'px';
                 particle.style.top = e.pageY + 'px';
-                
+
                 // Randomize movement direction
                 const tx = (Math.random() - 0.5) * 100; // Spread X
                 const ty = (Math.random() - 0.5) * 100; // Spread Y
-                
+
                 // Animate
                 particle.animate([
                     { transform: 'translate(0, 0) scale(1)', opacity: 1 },
@@ -455,9 +534,9 @@
                     easing: 'cubic-bezier(0, .9, .57, 1)',
                     fill: 'forwards'
                 });
-                
+
                 document.body.appendChild(particle);
-                
+
                 // Cleanup
                 setTimeout(() => {
                     particle.remove();
@@ -498,7 +577,7 @@
                 ctx.fill();
             }
         }
-        
+
         class Comet {
             constructor() {
                 this.reset();
@@ -521,22 +600,22 @@
             }
             update() {
                 if (!this.active) return;
-                
+
                 this.x += this.speedX;
                 this.y += this.speedY;
-                
+
                 if (this.y > canvas.height || this.x > canvas.width) {
                     this.active = false; // Reset when off screen
                 }
             }
             draw() {
                 if (!this.active) return;
-                
+
                 ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
-                
+
                 // Trail
                 ctx.beginPath();
                 ctx.strokeStyle = `rgba(255, 255, 255, 0.2)`;
@@ -550,26 +629,26 @@
         function init() {
             particlesArray = [];
             cometsArray = [];
-            
+
             // Create Stars
             let numberOfParticles = (canvas.height * canvas.width) / 10000;
             for (let i = 0; i < numberOfParticles; i++) {
                 particlesArray.push(new Star());
             }
-            
+
             // Create one Comet object (we reuse it)
             cometsArray.push(new Comet());
         }
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             // Stars
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
                 particlesArray[i].draw();
             }
-            
+
             // Comet Logic (Random chance to appear)
             let comet = cometsArray[0];
             if (!comet.active && Math.random() < 0.003) { // 0.3% chance per frame
@@ -577,7 +656,7 @@
             }
             comet.update();
             comet.draw();
-            
+
             requestAnimationFrame(animate);
         }
 
@@ -591,4 +670,5 @@
         animate();
     </script>
 </body>
+
 </html>

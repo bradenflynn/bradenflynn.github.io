@@ -253,6 +253,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1: Toyota -->
                 <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
                     <a href="toyota-project.html" target="_blank"
                         class="block h-72 bg-navy-950 flex items-center justify-center relative overflow-hidden">
@@ -289,45 +290,7 @@
                     </div>
                 </div>
 
-                <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
-                    <a href="https://bradenflynn.github.io/" target="_blank"
-                        class="block h-72 bg-navy-950 flex items-center justify-center relative overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-all duration-500 z-10">
-                        </div>
-                        <img src="Finance-Overview-2.webp" alt="Power BI Dashboard"
-                            class="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
-                    </a>
-                    <div class="p-8 flex-grow flex flex-col justify-between">
-                        <div>
-                            <a href="https://bradenflynn.github.io/" target="_blank" class="block group">
-                                <h3
-                                    class="font-serif text-2xl font-bold text-silver-100 mb-4 group-hover:text-gold-400 transition-colors">
-                                    Financial Analytics Dashboard
-                                </h3>
-                            </a>
-                            <p class="text-sm mb-4 leading-relaxed text-silver-300">
-                                Developed an interactive Financial Performance Dashboard for <strong>Thermo Fisher
-                                    Scientific</strong> to track revenue trends, expense management, and profitability
-                                metrics to support strategic decision making.
-                            </p>
-                        </div>
-
-                        <div class="mt-6 pt-4 border-t border-silver-300/10">
-                            <div class="flex flex-wrap gap-5 font-mono text-xs text-gold-400 mb-3">
-                                <span>Power BI</span>
-                                <span>Thermo Fisher</span>
-                                <span>Data Viz</span>
-                                <span>BI</span>
-                            </div>
-                            <p class="text-[10px] text-gray-500 italic">
-                                * Disclaimer: The dashboard shown is a representative sample. Actual project contains
-                                confidential Thermo Fisher Scientific financial data.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- Project 2: NVIDIA -->
                 <div class="glass-card rounded-lg overflow-hidden group flex flex-col reveal-section">
                     <a href="nvidia-project.html" target="_blank"
                         class="block h-72 bg-navy-950 flex items-center justify-center relative overflow-hidden">
@@ -361,6 +324,44 @@
                                 <span>CAPM</span>
                             </div>
                             <p class="text-[10px] text-transparent select-none">.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Financial Analytics Dashboard (Centered) -->
+                <div class="md:col-span-2 flex justify-center">
+                    <div class="glass-card rounded-lg overflow-hidden flex flex-col reveal-section max-w-[480px]">
+                        <div class="h-72 bg-navy-950 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-navy-900/10 z-10"></div>
+                            <img src="Finance-Overview-2.webp" alt="Power BI Dashboard"
+                                class="h-full w-full object-contain p-4">
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-silver-100 mb-4">
+                                    Financial Analytics Dashboard
+                                </h3>
+                                <p class="text-sm mb-4 leading-relaxed text-silver-300">
+                                    Developed an interactive Financial Performance Dashboard for <strong>Thermo Fisher
+                                        Scientific</strong> to track revenue trends, expense management, and
+                                    profitability
+                                    metrics to support strategic decision making.
+                                </p>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-silver-300/10">
+                                <div class="flex flex-wrap gap-5 font-mono text-xs text-gold-400 mb-3">
+                                    <span>Power BI</span>
+                                    <span>Thermo Fisher</span>
+                                    <span>Data Viz</span>
+                                    <span>BI</span>
+                                </div>
+                                <p class="text-[10px] text-gray-500 italic">
+                                    * Disclaimer: The dashboard shown is a representative sample. Actual project
+                                    contains
+                                    confidential Thermo Fisher Scientific financial data.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -620,64 +621,4 @@
             draw() {
                 if (!this.active) return;
 
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Trail
-                ctx.beginPath();
-                ctx.strokeStyle = `rgba(255, 255, 255, 0.2)`;
-                ctx.lineWidth = this.size;
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x - (this.speedX * 10), this.y - (this.speedY * 10));
-                ctx.stroke();
-            }
-        }
-
-        function init() {
-            particlesArray = [];
-            cometsArray = [];
-
-            // Create Stars
-            let numberOfParticles = (canvas.height * canvas.width) / 10000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Star());
-            }
-
-            // Create one Comet object (we reuse it)
-            cometsArray.push(new Comet());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Stars
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-
-            // Comet Logic (Random chance to appear)
-            let comet = cometsArray[0];
-            if (!comet.active && Math.random() < 0.003) { // 0.3% chance per frame
-                comet.activate();
-            }
-            comet.update();
-            comet.draw();
-
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            init();
-        });
-
-        init();
-        animate();
-    </script>
-</body>
-
-</html>
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opa

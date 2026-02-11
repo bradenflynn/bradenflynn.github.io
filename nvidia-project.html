@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NVIDIA Institutional Valuation | Braden Flynn</title>
+    <title>NVIDIA Analysis | Braden Flynn</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,123 +47,109 @@
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="font-mono text-gold-400 hover:text-silver-100 transition-colors">← Back to
                 Portfolio</a>
-            <div class="font-mono text-xs text-silver-300">Equity Research & ROI Analysis</div>
+            <div class="font-mono text-xs text-silver-300 uppercase tracking-widest">Case Study: NVIDIA Analysis</div>
         </div>
     </nav>
 
     <header class="pt-32 pb-16 px-6">
         <div class="max-w-4xl mx-auto">
-            <h1 class="font-serif text-4xl md:text-6xl font-bold text-silver-100 mb-6">NVIDIA Institutional Financial
-                Model</h1>
-            <div class="flex flex-wrap gap-4 font-mono text-sm text-gold-400">
-                <span>Python Modeling</span>
-                <span>DCF Valuation</span>
-                <span>CAPM</span>
-                <span>Capital Allocation</span>
-            </div>
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-silver-100 mb-6">NVIDIA Business Case & Valuation
+            </h1>
+            <p class="text-xl text-gold-400 font-mono mb-8">Using Python to Simluate Big Business Decisions</p>
         </div>
     </header>
 
     <main class="pb-24 px-6">
         <div class="max-w-4xl mx-auto space-y-16">
+            <!-- Part 1: The Project -->
             <section class="glass-card p-8 rounded-lg">
                 <h2 class="font-serif text-2xl font-bold text-silver-100 mb-6 flex items-center">
-                    <span class="font-mono text-gold-400 text-lg mr-3">01.</span> Executive Summary
+                    <span class="font-mono text-gold-400 text-lg mr-3">01.</span> The Goal
                 </h2>
                 <p class="text-lg leading-relaxed mb-6">
-                    This project presents an institutional-grade analysis of NVIDIA Corporation, evaluating a
-                    multi-billion dollar headcount investment and stress-testing the current market valuation. The model
-                    answers two critical questions: Is the proposed hiring plan accretive to value? And can the current
-                    $190 share price be fundamentally justified?
+                    NVIDIA is one of the most talked-about companies in the world. I wanted to build a model that looks
+                    past the hype and uses real financial math to see if two things make sense:
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-                    <div class="border-l-2 border-gold-400 pl-6">
-                        <h3 class="text-gold-400 font-mono text-sm mb-2 uppercase">Hiring Case</h3>
-                        <p class="text-silver-100">APPROVED. The model predicts a 37.0% steady-state ROIC, well above
-                            the 11.3% WACC hurdle rate.</p>
-                    </div>
-                    <div class="border-l-2 border-gold-400 pl-6">
-                        <h3 class="text-gold-400 font-mono text-sm mb-2 uppercase">Equity Case</h3>
-                        <p class="text-silver-100">CAUTION. DCF fair value is $108, suggesting the market is pricing in
-                            near-perfect execution & 32% growth.</p>
-                    </div>
-                </div>
+                <ol class="list-decimal list-inside space-y-4 text-silver-100 ml-4 mb-8">
+                    <li><strong>Hiring:</strong> Does it actually pay off to hire 2,000 new engineers right now?</li>
+                    <li><strong>Stock Price:</strong> Is NVIDIA really worth $190 per share, or is that just market
+                        excitement?</li>
+                </ol>
             </section>
 
+            <!-- Part 2: How I Got the Numbers -->
             <section>
                 <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
-                    <span class="font-mono text-gold-400 text-lg mr-3">02.</span> Strategic Investment Analysis (ROIC)
+                    <span class="font-mono text-gold-400 text-lg mr-3">02.</span> How I Got the Numbers
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6">
-                        <p>I modeled a Productivity Ramp for 2,000 new engineers over 3 years (40% → 70% → 100%). The
-                            analysis accounts for $750M in annual OpEx, $100M in initial CapEx, and incremental working
-                            capital needs.</p>
-                        <div class="bg-navy-800 p-6 rounded-lg border border-gold-400/10">
-                            <h4 class="font-mono text-gold-400 text-sm mb-3">Key Metric: Economic Spread</h4>
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <p class="text-2xl font-bold text-silver-100">37.0%</p>
-                                    <p class="text-xs font-mono uppercase">Steady ROIC</p>
-                                </div>
-                                <div class="text-xs font-mono text-silver-300">vs</div>
-                                <div class="text-right">
-                                    <p class="text-2xl font-bold text-silver-100">11.3%</p>
-                                    <p class="text-xs font-mono uppercase">WACC</p>
-                                </div>
-                            </div>
+                <div class="space-y-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">1. Calculating the "Hurdle Rate"
+                                (WACC)</h3>
+                            <p>To know if an investment is good, you first have to know how much profit the company
+                                <em>needs</em> to make just to pay its bills and keep investors happy. I combined the
+                                interest rates on government bonds with a "risk score" for NVIDIA's stock. I found that
+                                NVIDIA needs to make at least <strong>11.3% profit</strong> on any new project for it to
+                                be worth doing.</p>
                         </div>
-                    </div>
-                    <div class="glass-card p-4 rounded-lg">
-                        <img src="visual_1_investment_decision.png" alt="Investment Decision"
-                            class="w-full h-auto rounded">
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
-                    <span class="font-mono text-gold-400 text-lg mr-3">03.</span> Valuation & Market Expectations
-                </h2>
-                <div class="space-y-8">
-                    <div class="glass-card p-6 rounded-lg">
-                        <img src="visual_2_valuation_bridge.png" alt="Valuation Bridge" class="w-full h-auto rounded">
-                        <p class="mt-4 text-center text-silver-300">A two-stage DCF reveals a $108 fair value,
-                            highlighting the $82 "speculative premium" in the market price.</p>
+                        <div class="glass-card p-4 rounded-lg">
+                            <img src="visual_1_investment_decision.png" alt="ROIC Analysis"
+                                class="w-full h-auto rounded">
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="glass-card p-8 rounded-lg">
-                            <h3 class="font-serif text-xl font-bold text-silver-100 mb-4">Sensitivity Analysis</h3>
-                            <p class="text-sm">The scenario matrix shows that only in a "Blue Sky" scenario (30%+
-                                revenue CAGR and 65% sustained margins) does the fundamental value approach the current
-                                market price.</p>
-                            <img src="visual_3_scenario_matrix.png" alt="Scenario Matrix"
-                                class="w-full h-auto rounded mt-6">
+                        <div class="glass-card p-4 rounded-lg order-2 md:order-1">
+                            <img src="visual_2_valuation_bridge.png" alt="Valuation" class="w-full h-auto rounded">
                         </div>
-                        <div class="glass-card p-8 rounded-lg">
-                            <h3 class="font-serif text-xl font-bold text-silver-100 mb-4">WACC Disclosure</h3>
-                            <ul class="space-y-4 font-mono text-sm">
-                                <li class="flex justify-between"><span>Risk-Free Rate:</span> <span
-                                        class="text-gold-400">4.3%</span></li>
-                                <li class="flex justify-between"><span>Adjusted Beta:</span> <span
-                                        class="text-gold-400">1.50</span></li>
-                                <li class="flex justify-between"><span>Equity Risk Premium:</span> <span
-                                        class="text-gold-400">4.8%</span></li>
-                                <li class="flex justify-between"><span>Cost of Equity:</span> <span
-                                        class="text-gold-400">11.5%</span></li>
-                                <li class="border-t border-navy-800 pt-2 flex justify-between"><span>Final WACC:</span>
-                                    <span class="text-gold-400">11.3%</span></li>
-                            </ul>
+                        <div class="space-y-4 order-1 md:order-2">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">2. The "Time Machine" (DCF)</h3>
+                            <p>I built a "Discounted Cash Flow" (DCF) model. Think of this as a time machine for money.
+                                I predicted how much cash NVIDIA will likely generate over the next 10 years, and then
+                                calculated what that future cash is worth in <em>today's dollars</em>. This revealed a
+                                fair stock price of about <strong>$108</strong>.</p>
                         </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h3 class="font-mono text-gold-400 text-sm uppercase">3. The 3-Year "Learning Curve"</h3>
+                            <p>Engineers aren't 100% productive on their first day. My model simulates a "ramp-up"
+                                period where the new hires gradually contribute more revenue over 3 years. Even with
+                                this conservative start, the hiring plan still earns a <strong>37% return</strong>,
+                                which is way above our 11.3% hurdle rate from Step 1.</p>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <img src="visual_3_scenario_matrix.png" alt="Scenario Matrix" class="w-full h-auto rounded">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 3: The Conclusion -->
+            <section class="glass-card p-8 rounded-lg bg-navy-800/40 border-gold-400/20">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-6 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">03.</span> Final Verdict
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 border border-silver-300/10 rounded bg-navy-950/50">
+                        <h4 class="text-gold-400 font-bold mb-2">The Business Move: YES</h4>
+                        <p class="text-sm">Hiring the 2,000 engineers is a massive win. For every dollar spent on them,
+                            the company generates significantly more in value. It's an efficient use of capital.</p>
+                    </div>
+                    <div class="p-6 border border-silver-300/10 rounded bg-navy-950/50">
+                        <h4 class="text-gold-400 font-bold mb-2">The Stock Price: CAUTION</h4>
+                        <p class="text-sm">At $190, the stock is "expensive." It assumes NVIDIA will grow at 32% every
+                            single year for the next decade. While possible, it leaves very little room for error.</p>
                     </div>
                 </div>
             </section>
 
             <footer class="pt-16 text-center">
                 <a href="index.html"
-                    class="inline-block px-8 py-4 border border-gold-400 text-gold-400 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all">
-                    Return to Portfolio
+                    class="inline-block px-10 py-4 border-2 border-gold-400 text-gold-400 font-mono text-sm font-bold rounded hover:bg-gold-400 hover:text-navy-900 transition-all">
+                    Back to Portfolio
                 </a>
             </footer>
         </div>

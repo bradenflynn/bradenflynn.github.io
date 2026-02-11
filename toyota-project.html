@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Price Prediction | Braden Flynn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#0a192f', 800: '#112240', 950: '#020c1b' },
+                        gold: { 400: '#d4af37', 500: '#c5a028' },
+                        silver: { 100: '#e6f1ff', 300: '#8892b0' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a192f;
+        }
+
+        .glass-card {
+            background: rgba(17, 34, 64, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+
+<body class="text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900">
+    <nav class="fixed w-full z-50 glass-card border-b-0 top-0">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-mono text-gold-400 hover:text-silver-100 transition-colors">← Back to
+                Portfolio</a>
+            <div class="font-mono text-xs text-silver-300">Project Case Study</div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-silver-100 mb-6">Toyota Price Prediction Model
+            </h1>
+            <div class="flex flex-wrap gap-4 font-mono text-sm text-gold-400">
+                <span>R Programming</span>
+                <span>Linear Regression</span>
+                <span>SQL</span>
+                <span>Data Mining</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="pb-24 px-6">
+        <div class="max-w-4xl mx-auto space-y-16">
+            <section class="glass-card p-8 rounded-lg">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-6 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">01.</span> Project Overview
+                </h2>
+                <p class="text-lg leading-relaxed mb-6">
+                    This analysis focuses on predicting used car prices for Toyota vehicles using a dataset of 6,738
+                    records. The goal was to identify the key drivers of vehicle value to help auto dealers and private
+                    sellers estimate market prices accurately.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                    <div class="border-l-2 border-gold-400 pl-6">
+                        <h3 class="text-gold-400 font-mono text-sm mb-2 uppercase">Dataset Scope</h3>
+                        <p class="text-silver-100">6,738 independent vehicle records across multiple Toyota models
+                            (Supra, Land Cruiser, RAV4, etc.) from 2012–2020.</p>
+                    </div>
+                    <div class="border-l-2 border-gold-400 pl-6">
+                        <h3 class="text-gold-400 font-mono text-sm mb-2 uppercase">Core Challenge</h3>
+                        <p class="text-silver-100">Accounting for massive price variability (e.g., Land Cruiser vs.
+                            Aygo) while maintaining predictive accuracy using linear regression.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">02.</span> Methodology & Analysis
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-6">
+                        <h3 class="font-serif text-xl font-bold text-silver-100">Data Engineering</h3>
+                        <p>The process began with rigorous data cleaning, addressing outliers in MPG values (some
+                            records showed >200 MPG) and imputing missing values to preserve the full dataset.
+                            Exploratory analysis was conducted using <code>sqldf</code> for complex queries and
+                            <code>ggplot2</code> for visualization.</p>
+
+                        <h3 class="font-serif text-xl font-bold text-silver-100">Statistical Approach</h3>
+                        <p>A correlation matrix was used to isolate variables with the strongest relationship to price.
+                            Engine size (+0.73) and vehicle age (+0.42) were identified as the primary drivers, while
+                            mileage showed a strong negative correlation (-0.73) as expected.</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <img src="project-datamining.png" alt="Toyota Data Analysis" class="w-full h-auto rounded">
+                        <p class="mt-4 text-xs font-mono text-center text-silver-300 italic">Consolidated Data
+                            Distributions and Analysis</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-card p-8 rounded-lg">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">03.</span> Key Insights & Results
+                </h2>
+                <div class="space-y-12">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="flex-1">
+                            <h3 class="font-mono text-gold-400 text-lg mb-4">Regression Performance</h3>
+                            <p class="mb-4">The linear regression model achieved an <strong>R² of 0.53</strong>, meaning
+                                53% of the price variability is explained solely by engine size.</p>
+                            <div class="bg-navy-950 p-4 rounded font-mono text-sm border border-gold-400/20">
+                                <p class="text-gold-400"># Model Insight</p>
+                                <p class="text-silver-100">Predict: Price ~ EngineSize</p>
+                                <p class="text-silver-100">Result: +$10,673 per 1L increase</p>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-mono text-gold-400 text-lg mb-4">Fuel & Transmission Trends</h3>
+                            <ul class="space-y-3 list-disc list-inside">
+                                <li><strong>Hybrid Advantage:</strong> Hybrid engines commanded the highest average
+                                    price in the dataset.</li>
+                                <li><strong>Transmission:</strong> Automatic transmissions fetched significantly higher
+                                    prices than manual counterparts across all models.</li>
+                                <li><strong>Premium Models:</strong> Supra and Land Cruiser exhibited the highest price
+                                    ceilings and highest variability.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="pt-16 text-center">
+                <a href="index.html"
+                    class="inline-block px-8 py-4 border border-gold-400 text-gold-400 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all">
+                    Return to Portfolio
+                </a>
+            </footer>
+        </div>
+    </main>
+</body>
+
+</html>

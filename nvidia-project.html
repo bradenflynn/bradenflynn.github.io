@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA Institutional Valuation | Braden Flynn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#0a192f', 800: '#112240', 950: '#020c1b' },
+                        gold: { 400: '#d4af37', 500: '#c5a028' },
+                        silver: { 100: '#e6f1ff', 300: '#8892b0' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a192f;
+        }
+
+        .glass-card {
+            background: rgba(17, 34, 64, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+
+<body class="text-silver-300 font-sans antialiased selection:bg-gold-400 selection:text-navy-900">
+    <nav class="fixed w-full z-50 glass-card border-b-0 top-0">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-mono text-gold-400 hover:text-silver-100 transition-colors">← Back to
+                Portfolio</a>
+            <div class="font-mono text-xs text-silver-300">Equity Research & ROI Analysis</div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-silver-100 mb-6">NVIDIA Institutional Financial
+                Model</h1>
+            <div class="flex flex-wrap gap-4 font-mono text-sm text-gold-400">
+                <span>Python Modeling</span>
+                <span>DCF Valuation</span>
+                <span>CAPM</span>
+                <span>Capital Allocation</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="pb-24 px-6">
+        <div class="max-w-4xl mx-auto space-y-16">
+            <section class="glass-card p-8 rounded-lg">
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-6 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">01.</span> Executive Summary
+                </h2>
+                <p class="text-lg leading-relaxed mb-6">
+                    This project presents an institutional-grade analysis of NVIDIA Corporation, evaluating a
+                    multi-billion dollar headcount investment and stress-testing the current market valuation. The model
+                    answers two critical questions: Is the proposed hiring plan accretive to value? And can the current
+                    $190 share price be fundamentally justified?
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                    <div class="border-l-2 border-gold-400 pl-6">
+                        <h3 class="text-gold-400 font-mono text-sm mb-2 uppercase">Hiring Case</h3>
+                        <p class="text-silver-100">APPROVED. The model predicts a 37.0% steady-state ROIC, well above
+                            the 11.3% WACC hurdle rate.</p>
+                    </div>
+                    <div class="border-l-2 border-gold-400 pl-6">
+                        <h3 class="text-gold-400 font-mono text-sm mb-2 uppercase">Equity Case</h3>
+                        <p class="text-silver-100">CAUTION. DCF fair value is $108, suggesting the market is pricing in
+                            near-perfect execution & 32% growth.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">02.</span> Strategic Investment Analysis (ROIC)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <p>I modeled a Productivity Ramp for 2,000 new engineers over 3 years (40% → 70% → 100%). The
+                            analysis accounts for $750M in annual OpEx, $100M in initial CapEx, and incremental working
+                            capital needs.</p>
+                        <div class="bg-navy-800 p-6 rounded-lg border border-gold-400/10">
+                            <h4 class="font-mono text-gold-400 text-sm mb-3">Key Metric: Economic Spread</h4>
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <p class="text-2xl font-bold text-silver-100">37.0%</p>
+                                    <p class="text-xs font-mono uppercase">Steady ROIC</p>
+                                </div>
+                                <div class="text-xs font-mono text-silver-300">vs</div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-bold text-silver-100">11.3%</p>
+                                    <p class="text-xs font-mono uppercase">WACC</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <img src="visual_1_investment_decision.png" alt="Investment Decision"
+                            class="w-full h-auto rounded">
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-serif text-2xl font-bold text-silver-100 mb-8 flex items-center">
+                    <span class="font-mono text-gold-400 text-lg mr-3">03.</span> Valuation & Market Expectations
+                </h2>
+                <div class="space-y-8">
+                    <div class="glass-card p-6 rounded-lg">
+                        <img src="visual_2_valuation_bridge.png" alt="Valuation Bridge" class="w-full h-auto rounded">
+                        <p class="mt-4 text-center text-silver-300">A two-stage DCF reveals a $108 fair value,
+                            highlighting the $82 "speculative premium" in the market price.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="glass-card p-8 rounded-lg">
+                            <h3 class="font-serif text-xl font-bold text-silver-100 mb-4">Sensitivity Analysis</h3>
+                            <p class="text-sm">The scenario matrix shows that only in a "Blue Sky" scenario (30%+
+                                revenue CAGR and 65% sustained margins) does the fundamental value approach the current
+                                market price.</p>
+                            <img src="visual_3_scenario_matrix.png" alt="Scenario Matrix"
+                                class="w-full h-auto rounded mt-6">
+                        </div>
+                        <div class="glass-card p-8 rounded-lg">
+                            <h3 class="font-serif text-xl font-bold text-silver-100 mb-4">WACC Disclosure</h3>
+                            <ul class="space-y-4 font-mono text-sm">
+                                <li class="flex justify-between"><span>Risk-Free Rate:</span> <span
+                                        class="text-gold-400">4.3%</span></li>
+                                <li class="flex justify-between"><span>Adjusted Beta:</span> <span
+                                        class="text-gold-400">1.50</span></li>
+                                <li class="flex justify-between"><span>Equity Risk Premium:</span> <span
+                                        class="text-gold-400">4.8%</span></li>
+                                <li class="flex justify-between"><span>Cost of Equity:</span> <span
+                                        class="text-gold-400">11.5%</span></li>
+                                <li class="border-t border-navy-800 pt-2 flex justify-between"><span>Final WACC:</span>
+                                    <span class="text-gold-400">11.3%</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="pt-16 text-center">
+                <a href="index.html"
+                    class="inline-block px-8 py-4 border border-gold-400 text-gold-400 font-mono text-sm rounded hover:bg-gold-400 hover:text-navy-900 transition-all">
+                    Return to Portfolio
+                </a>
+            </footer>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -621,4 +621,64 @@
             draw() {
                 if (!this.active) return;
 
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opa
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Trail
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(255, 255, 255, 0.2)`;
+                ctx.lineWidth = this.size;
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - (this.speedX * 10), this.y - (this.speedY * 10));
+                ctx.stroke();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            cometsArray = [];
+
+            // Create Stars
+            let numberOfParticles = (canvas.height * canvas.width) / 10000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Star());
+            }
+
+            // Create one Comet object (we reuse it)
+            cometsArray.push(new Comet());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Stars
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+
+            // Comet Logic (Random chance to appear)
+            let comet = cometsArray[0];
+            if (!comet.active && Math.random() < 0.003) { // 0.3% chance per frame
+                comet.activate();
+            }
+            comet.update();
+            comet.draw();
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+    </script>
+</body>
+
+</html>
